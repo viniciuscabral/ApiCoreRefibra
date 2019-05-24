@@ -1,0 +1,28 @@
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.deps.json
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.runtimeconfig.json
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.runtimeconfig.dev.json
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.dll
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.pdb
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.csproj.CoreCompileInputs.cache
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorAssemblyInfo.cache
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorAssemblyInfo.cs
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.AssemblyInfoInputs.cache
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.AssemblyInfo.cs
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.dll
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.pdb
+C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.csprojAssemblyReference.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.deps.json
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.runtimeconfig.json
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.runtimeconfig.dev.json
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.dll
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/bin/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.pdb
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.csprojAssemblyReference.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.csproj.CoreCompileInputs.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorAssemblyInfo.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorAssemblyInfo.cs
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.AssemblyInfoInputs.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.AssemblyInfo.cs
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.dll
+/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.pdb
