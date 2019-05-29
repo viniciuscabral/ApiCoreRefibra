@@ -8,7 +8,7 @@ namespace ApiJenaFusekiRefibra.Interface
     public interface IFusekiServices
     {
 
-        Task RegisterItem(Item item);
+        Task<List<RDF>> RegisterItem(Item item);
         IEnumerable<string> GetAllItens();
         IEnumerable<Object> GetItensByName();
         IEnumerable<Object> GetItensRelation();

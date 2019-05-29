@@ -21,7 +21,7 @@ namespace ApiJenaFusekiRefibra.Implementation
             _appSettings = settings.Value;
         }
 
-        public async Task RegisterItem(Item item)
+        public async Task<List<RDF>> RegisterItem(Item item)
         {
 
             WikifierObj wikifierObj = await ProcessarWikifier(item.Text);
@@ -55,6 +55,11 @@ namespace ApiJenaFusekiRefibra.Implementation
                 listRdf.Add(rdf);
 
                 InsertTriples(listRdf);
+
+                return listRdf;
+            }
+            else{
+                return null;
             }
             
         }     
@@ -170,7 +175,7 @@ namespace ApiJenaFusekiRefibra.Implementation
             try
             {
                 FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
-
+                fuseki.SetCredentials(_appSettings.LoginFuseki,_appSettings.PasswordFuseki);
                 IGraph g = new Graph();
                 fuseki.LoadGraph(g, (Uri)null);
                 List<Triple> ts = new List<Triple>();

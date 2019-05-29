@@ -32,6 +32,17 @@ namespace WsTestes
             services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("ProjetoVini"); });
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddAutoMapper();
+            services.AddCors(options => 
+            {
+                options.AddPolicy("AllowAll",
+                    builder => 
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowCredentials()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +53,7 @@ namespace WsTestes
             //    app.UseDeveloperExceptionPage();
             //}
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
     }

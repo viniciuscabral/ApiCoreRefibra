@@ -8,6 +8,8 @@ namespace ApiJenaFusekiRefibra.Model
     public class AppSettings
     {
         public string StorageConnectionString { get; set; }
+        public string LoginFuseki { get; set; }
+        public string PasswordFuseki { get; set; }
         public string MetaRefibra { get; set; }
     }
 }

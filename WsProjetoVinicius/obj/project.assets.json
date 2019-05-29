@@ -13180,11 +13180,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
+      "projectUniqueName": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
       "projectName": "ApiJenaFusekiRefibra",
-      "projectPath": "/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
+      "projectPath": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
       "packagesPath": "/home/vini/.nuget/packages/",
-      "outputPath": "/home/vini/Downloads/ProjetoRefibra/WsRefibra/WsProjetoVinicius/obj/",
+      "outputPath": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
