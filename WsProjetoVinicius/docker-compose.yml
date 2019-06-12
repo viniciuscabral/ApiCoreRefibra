@@ -2,6 +2,7 @@ version: '3'
 
 services: 
     db: 
+      container_name: fuseki.refibra
       hostname: fusekirefibra.docker
       image: 'stain/jena-fuseki'
       environment: 
@@ -11,6 +12,7 @@ services:
       expose:
         - 3030
     web: 
+      container_name: apicore.refibra
       hostname: apirefibra.docker
       build: .
       container_name: api_web_refibra
