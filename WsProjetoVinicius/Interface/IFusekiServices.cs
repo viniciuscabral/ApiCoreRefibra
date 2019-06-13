@@ -9,7 +9,7 @@ namespace ApiJenaFusekiRefibra.Interface
     {
 
         Task<List<RDF>> RegisterItem(Item item);
-        IEnumerable<string> GetAllItens();
+        IEnumerable<Object> GetAllItens();
         IEnumerable<Object> GetItensByName();
         IEnumerable<Object> GetItensRelation();
 

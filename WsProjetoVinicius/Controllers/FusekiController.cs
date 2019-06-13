@@ -17,6 +17,7 @@ namespace ApiJenaFusekiRefibra.Controllers
 {
     [ApiController]
     [EnableCors("AllowAll")]
+
     public class FusekiController : Controller
     {
         private IFusekiServices _fusekiService;        

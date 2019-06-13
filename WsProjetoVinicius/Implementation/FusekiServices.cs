@@ -38,20 +38,22 @@ namespace ApiJenaFusekiRefibra.Implementation
                     listRdf.Add(rdf);
                 }
 
+                rdf = new RDF();
                 rdf.Subject = _appSettings.MetaRefibra + item.Name;
                 rdf.Predicate = _appSettings.MetaRefibra + "text"; 
                 rdf.Object = item.Text;
                 listRdf.Add(rdf);
-                
+
+                rdf = new RDF();
                 rdf.Subject = _appSettings.MetaRefibra + item.Name;
                 rdf.Predicate = _appSettings.MetaRefibra + "image";
                 rdf.Object = item.Image;
+                listRdf.Add(rdf);
 
+                rdf = new RDF();
                 rdf.Subject = _appSettings.MetaRefibra + item.Name;
                 rdf.Predicate = _appSettings.MetaRefibra + "title";
-                rdf.Object = item.Name;
-
-                
+                rdf.Object = item.Name;                
                 listRdf.Add(rdf);
 
                 InsertTriples(listRdf);
@@ -64,20 +66,40 @@ namespace ApiJenaFusekiRefibra.Implementation
             
         }     
 
-        public IEnumerable<string> GetAllItens()
+        public IEnumerable<Object> GetAllItens()
         {
 
             VDS.RDF.Options.UriLoaderCaching = false;
             FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
-            List<string> listRdfBase = new List<string>();
-            SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?subject ?predicate ?object WHERE {?subject ?predicate ?object}");
+            List<Object> listRdfBase = new List<Object>();
+            SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                             " +
+                                                            "WHERE {                                                      " +
+                                                            "  ?item <http://metadadorefibra.ufpe/text> ?object           " +
+                                                            "  {                                                          " +
+                                                            "  select ?title                                              " +
+                                                            "  where {  ?item <http://metadadorefibra.ufpe/title> ?title }" +
+                                                            "  }                                                          " +
+                                                            "  {                                                          " +
+                                                            "  select ?img                                                " +
+                                                            "  where {  ?item <http://metadadorefibra.ufpe/image> ?img }  " +
+                                                            "  }                                                          " +
+                                                            "}");
+
             foreach (SparqlResult result in rset.Results)
             {
-
-                listRdfBase.Add(result.Value("subject").ToString());
+                listRdfBase.Add(new { item = result.Value("item").ToString()
+                                    , title = result.Value("title").ToString()
+                                     , image = result.Value("img").ToString()
+                });
             }
+
+            //foreach (SparqlResult result in rset.Results)
+            //{
+
+            //    listRdfBase.Add(result.Value("subject").ToString());
+            //}
 
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
@@ -122,23 +144,33 @@ namespace ApiJenaFusekiRefibra.Implementation
             fuseki.LoadGraph(h, (Uri)null);
             List<Object> listRdfBase = new List<Object>();
 
-            var query = "select " +
-                  "distinct  ?s ?p ?x ?o " +
-                  "WHERE {  " +
-                   " ?s ?p ?o . " +
-                   " ?x ?p ?o .  " +
-                   " filter (?s != ?x) . " +
-                   " filter (!isLiteral(?o)) . " +                  
-                   "} " +
-                   "group by ?s ?p ?x ?o ";
+            var query = "select                                  " +
+                        "distinct  ?item1 ?relation ?item2 ?obj  " +
+                        "WHERE {                                 " +
+                        "   ?item1 ?relation ?obj .              " +
+                        "  ?item2 ?relation ?obj .               " +
+                        "  filter ( ?item1 != ?item2) .          " +
+                        "  filter (!isLiteral(?obj)) .           " +
+                        "}                                       " +
+                        "group by  ?item1 ?relation ?item2 ?obj  "; 
 
             SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
-
             foreach (SparqlResult result in rset.Results)
             {
-
-                listRdfBase.Add(result);
+                listRdfBase.Add(new
+                {
+                    item1 = result.Value("item1").ToString(),
+                    relation = result.Value("relation").ToString(),
+                    item2 = result.Value("item2").ToString(),
+                    obj = result.Value("obj").ToString()
+                });
             }
+
+            //foreach (SparqlResult result in rset.Results)
+            //{
+
+            //    listRdfBase.Add(result);
+            //}
 
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;

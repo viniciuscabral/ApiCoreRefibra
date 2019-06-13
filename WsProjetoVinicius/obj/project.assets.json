@@ -13174,28 +13174,30 @@
     ]
   },
   "packageFolders": {
-    "/home/vini/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\vcab\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
+      "projectUniqueName": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
       "projectName": "ApiJenaFusekiRefibra",
-      "projectPath": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/ApiJenaFusekiRefibra.csproj",
-      "packagesPath": "/home/vini/.nuget/packages/",
-      "outputPath": "/home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/obj/",
+      "projectPath": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
+      "packagesPath": "C:\\Users\\vcab\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/vini/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\vcab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

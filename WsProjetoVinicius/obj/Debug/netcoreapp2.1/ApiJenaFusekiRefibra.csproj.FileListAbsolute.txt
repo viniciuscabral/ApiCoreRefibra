@@ -40,3 +40,17 @@ C:/Users/SERTTEL/Desktop/WsProjetoVinicius - Cópia/WsProjetoVinicius/obj/Debug/
 /home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
 /home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.dll
 /home/vini/Documents/Repo/ApiCoreRefibra/ApiCoreRefibra/WsProjetoVinicius/obj/Debug/netcoreapp2.1/ApiJenaFusekiRefibra.pdb
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.deps.json
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.runtimeconfig.json
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.runtimeconfig.dev.json
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.csprojAssemblyReference.cache
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.csproj.CoreCompileInputs.cache
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorAssemblyInfo.cache
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorAssemblyInfo.cs
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.AssemblyInfoInputs.cache
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.AssemblyInfo.cs
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
+C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
