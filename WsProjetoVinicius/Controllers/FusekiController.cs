@@ -35,9 +35,9 @@ namespace ApiJenaFusekiRefibra.Controllers
 
         [HttpGet]
         [Route("ItensByName")]
-        public IActionResult ItensByName()
+        public IActionResult ItensByName([FromQuery] String item)
         {
-            return Ok(_fusekiService.GetItensByName());
+            return Ok(_fusekiService.GetItemByName(item));
         }
 
         [HttpGet]

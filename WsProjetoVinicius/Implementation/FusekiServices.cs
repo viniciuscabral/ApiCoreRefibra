@@ -35,7 +35,11 @@ namespace ApiJenaFusekiRefibra.Implementation
                     rdf.Subject = _appSettings.MetaRefibra + item.Name;
                     rdf.Predicate = _appSettings.MetaRefibra + "relation";
                     rdf.Object = annotationObj.Url;
-                    listRdf.Add(rdf);
+                    if(Double.Parse( annotationObj.PageRank.Replace(".",",")) > Double.Parse(_appSettings.PageRank))
+                    {
+                        listRdf.Add(rdf);
+                    }
+                    
                 }
 
                 rdf = new RDF();
@@ -74,18 +78,12 @@ namespace ApiJenaFusekiRefibra.Implementation
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
             List<Object> listRdfBase = new List<Object>();
-            SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                             " +
-                                                            "WHERE {                                                      " +
-                                                            "  ?item <http://metadadorefibra.ufpe/text> ?object           " +
-                                                            "  {                                                          " +
-                                                            "  select ?title                                              " +
-                                                            "  where {  ?item <http://metadadorefibra.ufpe/title> ?title }" +
-                                                            "  }                                                          " +
-                                                            "  {                                                          " +
-                                                            "  select ?img                                                " +
-                                                            "  where {  ?item <http://metadadorefibra.ufpe/image> ?img }  " +
-                                                            "  }                                                          " +
-                                                            "}");
+            SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                               " +
+                                                                "WHERE {                                                " +
+                                                                "  ?item <http://metadadorefibra.ufpe/text> ?object .   " +
+                                                                "  ?item <http://metadadorefibra.ufpe/title> ?title .   " +
+                                                                "  ?item <http://metadadorefibra.ufpe/image> ?img       " +
+                                                                "}");
 
             foreach (SparqlResult result in rset.Results)
             {
@@ -104,36 +102,55 @@ namespace ApiJenaFusekiRefibra.Implementation
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
-
-        public IEnumerable<Object> GetItensByName()
+        //4c5b68fd-d606-4451-95d3-deee925d4b39
+        public Object GetItemByName( string item)
         {
             VDS.RDF.Options.UriLoaderCaching = false;
             FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
-            List<Object> listRdfBase = new List<Object>();
-
-            string query = "PREFIX ref: <http://metadadorefibra.ufpe/>	  " +
-                            "select distinct ?s ?valor " +
-                            "where{ " +
-                            "{ " +
-                            "    select ?s ?p ?o " +
-                            "  where {  ?s ?p ?o filter(regex(?o,'','i')) } " +
-                            "} " +
-                            "{ " +
-                            "    select ?s  ?valor " +
-                            "    where{  ?s ref:title ?valor } " +
-                            "} }";
+            
+            string query = "select distinct ?relation ?obj " +   
+                            "where{ "+
+                            "  <http://metadadorefibra.ufpe/"+item+ "> ?relation ?obj " +
+                            "} ";
 
             SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
-
+            string text = "";
+            string image = "";
+            string title = "";
+            List<string> listRelation = new List<string>();
             foreach (SparqlResult result in rset.Results)
             {
-                listRdfBase.Add(result);
+                
+                if (result.Value("relation").ToString().Contains("text"))
+                {
+                    text = result.Value("obj").ToString();
+                }
+                if (result.Value("relation").ToString().Contains("title"))
+                {
+                    title = result.Value("obj").ToString();
+                }
+                if (result.Value("relation").ToString().Contains("image"))
+                {
+                    image = result.Value("obj").ToString();
+                }
+
+                if (result.Value("relation").ToString().Contains("relation"))
+                {
+                    listRelation.Add(result.Value("obj").ToString());
+                }
             }
+            
 
             VDS.RDF.Options.UriLoaderCaching = true;
-            return listRdfBase;
+            return new
+            {
+                Text = text,
+                Image = image,
+                Title = title,
+                ListRelation = listRelation
+            }; 
         }
 
         public IEnumerable<Object> GetItensRelation()
@@ -187,7 +204,7 @@ namespace ApiJenaFusekiRefibra.Implementation
             dict.Add("includeCosines", "false");
             dict.Add("support", "false");
             dict.Add("applyPageRankSqThreshold ", "false");
-            dict.Add("pageRankSqThreshold", "0.6");
+            dict.Add("pageRankSqThreshold", "0,6");
 
             var response = await client.PostAsync("http://www.wikifier.org/annotate-article", new FormUrlEncodedContent(dict));
 
