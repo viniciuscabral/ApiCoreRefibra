@@ -16,7 +16,7 @@ namespace ApiJenaFusekiRefibra.Model
        public string Title { get; set; }
        public string Url { get; set; }
        public string Lang { get; set; }
-       public string PageRank { get; set; }
+       public double PageRank { get; set; }
        public string SecLang { get; set; }
        public string SecTitle { get; set; }
        public string SecUrl { get; set; }

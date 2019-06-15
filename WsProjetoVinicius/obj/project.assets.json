@@ -13174,24 +13174,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vcab\\.nuget\\packages\\": {},
+    "C:\\Users\\vini\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
+      "projectUniqueName": "C:\\Users\\vini\\Desktop\\Repositorio\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
       "projectName": "ApiJenaFusekiRefibra",
-      "projectPath": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
-      "packagesPath": "C:\\Users\\vcab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vcab\\Documents\\Repo\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\obj\\",
+      "projectPath": "C:\\Users\\vini\\Desktop\\Repositorio\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\ApiJenaFusekiRefibra.csproj",
+      "packagesPath": "C:\\Users\\vini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vini\\Desktop\\Repositorio\\ApiRefibra\\ApiCoreRefibra\\WsProjetoVinicius\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\vcab\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\vini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"

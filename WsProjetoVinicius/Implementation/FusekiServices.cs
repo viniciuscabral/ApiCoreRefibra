@@ -35,7 +35,7 @@ namespace ApiJenaFusekiRefibra.Implementation
                     rdf.Subject = _appSettings.MetaRefibra + item.Name;
                     rdf.Predicate = _appSettings.MetaRefibra + "relation";
                     rdf.Object = annotationObj.Url;
-                    if(Double.Parse( annotationObj.PageRank.Replace(".",",")) > Double.Parse(_appSettings.PageRank))
+                    if(annotationObj.PageRank > _appSettings.PageRank)
                     {
                         listRdf.Add(rdf);
                     }

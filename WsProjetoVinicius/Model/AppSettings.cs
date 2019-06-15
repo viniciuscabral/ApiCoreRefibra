@@ -12,6 +12,6 @@ namespace ApiJenaFusekiRefibra.Model
         public string PasswordFuseki { get; set; }
         public string MetaRefibra { get; set; }
 
-        public string PageRank { get; set; }
+        public double PageRank { get; set; }
     }
 }

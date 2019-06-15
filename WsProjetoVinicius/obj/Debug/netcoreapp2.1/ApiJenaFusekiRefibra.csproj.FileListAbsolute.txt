@@ -54,3 +54,17 @@ C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Deb
 C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
 C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
 C:\Users\vcab\Documents\Repo\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.deps.json
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.runtimeconfig.json
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.runtimeconfig.dev.json
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.csprojAssemblyReference.cache
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.csproj.CoreCompileInputs.cache
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorAssemblyInfo.cache
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorAssemblyInfo.cs
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.AssemblyInfoInputs.cache
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.AssemblyInfo.cs
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
