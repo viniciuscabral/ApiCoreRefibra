@@ -1,6 +1,3 @@
-FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
 FROM microsoft/dotnet:2.2-sdk AS build-env
 WORKDIR /app
 
