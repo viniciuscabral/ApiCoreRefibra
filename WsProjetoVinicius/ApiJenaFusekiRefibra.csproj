@@ -2,6 +2,7 @@
 
   <PropertyGroup>
    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>ApiJenaFusekiRefibra</AssemblyName>
     <RootNamespace>ApiJenaFusekiRefibra</RootNamespace>
