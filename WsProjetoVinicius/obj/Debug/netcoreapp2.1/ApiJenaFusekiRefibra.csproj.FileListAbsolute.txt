@@ -68,3 +68,5 @@ C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\ob
 C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.RazorTargetAssemblyInfo.cache
 C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.dll
 C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.pdb
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\bin\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.xml
+C:\Users\vini\Desktop\Repositorio\ApiRefibra\ApiCoreRefibra\WsProjetoVinicius\obj\Debug\netcoreapp2.1\ApiJenaFusekiRefibra.xml
