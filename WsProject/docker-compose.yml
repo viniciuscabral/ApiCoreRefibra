@@ -17,7 +17,6 @@ services:
       container_name: apicore-refibra
       hostname: apirefibra
       build: .
-      container_name: apirefibra
       links:
         - db
       ports: 
