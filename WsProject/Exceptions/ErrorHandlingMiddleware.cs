@@ -4,7 +4,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace WsProject.Model
+namespace ApiRefibra.Exceptions
 {
     public class ErrorHandlingMiddleware
     {
@@ -20,7 +20,7 @@ namespace WsProject.Model
             {
                 await next(context);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 await HandleExceptionAsync(context, ex);
             }

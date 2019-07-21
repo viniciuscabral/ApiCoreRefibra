@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WsTestes": {
+    "WsProject": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "GetAllItens",

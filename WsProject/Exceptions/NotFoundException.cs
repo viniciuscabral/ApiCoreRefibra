@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace WsProject.Model
+namespace ApiRefibra.Exceptions
 {
     public class NotFoundException : Exception
     {

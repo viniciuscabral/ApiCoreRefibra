@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 
-namespace WsTestes.Repo
+namespace ApiRefibra.Repo
 {
     public class ApplicationDbContext : DbContext
     {

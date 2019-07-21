@@ -1,20 +1,20 @@
 ﻿using ApiRefibra.Implementation;
 using ApiRefibra.Interface;
 using ApiRefibra.Model;
+using ApiRefibra.Repo;
+using ApiRefibra.Exceptions;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WsProject.Model;
-using WsTestes.Repo;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
 using System.IO;
 
-namespace WsTestes
+namespace ApiRefibra
 {
     public class Startup
     {
@@ -58,7 +58,7 @@ namespace WsTestes
                     {
                         Version = "v1",                        
                         Title = "API Refibra",
-                        Description = "A simple API to share other world vision.",
+                        Description = "A simple API to share other world vision. Acess code on [https://github.com/viniciuscabral/ApiCoreRefibra](https://github.com/viniciuscabral/ApiCoreRefibra).",
                         TermsOfService = new Uri("https://example.com/terms"),                       
                         Contact = new OpenApiContact
                         {

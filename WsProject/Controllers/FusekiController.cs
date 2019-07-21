@@ -26,8 +26,9 @@ namespace ApiRefibra.Controllers
         /// <returns>Generic list with all itens in the database</returns>
         [HttpGet]
         [Route("GetAllItens")]
-        [ProducesResponseType(201)]
-        [ProducesResponseType(400)]        
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]                
         public IActionResult GetAllItens() 
         {      
             return Ok(_fusekiService.GetAllItens());
@@ -39,7 +40,10 @@ namespace ApiRefibra.Controllers
         /// <param name="itemName">Item name</param>
         /// <returns>Recovered itens</returns>
         [HttpGet]
-        [Route("ItensByName")]
+        [Route("ItensByName")]        
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]  
+        [ProducesResponseType(500)]        
         public IActionResult ItensByName([FromQuery] String itemName)
         {
             return Ok(_fusekiService.GetItemByName(itemName));
@@ -51,11 +55,42 @@ namespace ApiRefibra.Controllers
         /// <returns>Generic relational list </returns>
         [HttpGet]
         [Route("ItensRelation")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]  
+        [ProducesResponseType(500)] 
         public IActionResult ItensRelation()
         {
-            return Ok(_fusekiService.GetItensRelation());
+            return Ok(_fusekiService.GetAllItensRelation());
         }
 
+        /// <summary>
+        /// Get all relations in database
+        /// </summary>
+        /// <returns>string list </returns>
+        [HttpGet]
+        [Route("GetAllRelationsNames")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]  
+        [ProducesResponseType(500)] 
+        public IActionResult GetAllRelationsNames()
+        {
+            return Ok(_fusekiService.GetAllRelationsNames());
+        }
+
+        /// <summary>
+        /// Get itens by specific relation name
+        /// </summary>
+        /// <returns>itens with any relaton with the param name</returns>
+        [HttpGet]
+        [Route("GetItensByRelationName")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]  
+        [ProducesResponseType(500)] 
+        public IActionResult GetItensByRelationName([FromQuery] String relatioName)
+        {
+            return Ok(_fusekiService.GetItensByRelationName(relatioName));
+        }
+        
         /// <summary>
         /// Set a new item
         /// </summary>
@@ -72,7 +107,10 @@ namespace ApiRefibra.Controllers
         ///
         /// </remarks>
         /// <returns>A registred item</returns>
-        [HttpPost]
+        [HttpPost]        
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]   
+        [ProducesResponseType(500)]             
         [Route("AddItem")]
         public async Task<IActionResult> AddItemAsync(Item item)
         {            

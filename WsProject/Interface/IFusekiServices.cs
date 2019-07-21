@@ -11,7 +11,8 @@ namespace ApiRefibra.Interface
         Task<List<RDF>> RegisterItem(Item item);
         IEnumerable<Object> GetAllItens();
         Object GetItemByName(string item);
-        IEnumerable<Object> GetItensRelation();
-
+        IEnumerable<Object> GetAllItensRelation();
+        IEnumerable<Object> GetAllRelationsNames();
+        IEnumerable<Object> GetItensByRelationName(string relationName);
     }
 }

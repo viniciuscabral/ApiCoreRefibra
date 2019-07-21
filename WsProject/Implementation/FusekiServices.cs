@@ -1,14 +1,16 @@
 ﻿using ApiRefibra.Interface;
+using ApiRefibra.Exceptions;
 using ApiRefibra.Model;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using VDS.RDF;
-using VDS.RDF.Parsing;
 using VDS.RDF.Query;
 using VDS.RDF.Storage;
+
 
 namespace ApiRefibra.Implementation
 {
@@ -20,7 +22,6 @@ namespace ApiRefibra.Implementation
         {
             _appSettings = settings.Value;
         }
-
         public async Task<List<RDF>> RegisterItem(Item item)
         {
 
@@ -69,7 +70,6 @@ namespace ApiRefibra.Implementation
             }
             
         }     
-
         public IEnumerable<Object> GetAllItens()
         {
 
@@ -93,67 +93,109 @@ namespace ApiRefibra.Implementation
                 });
             }
 
-            //foreach (SparqlResult result in rset.Results)
-            //{
-
-            //    listRdfBase.Add(result.Value("subject").ToString());
-            //}
-
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
-        //4c5b68fd-d606-4451-95d3-deee925d4b39
-        public Object GetItemByName( string item)
+        public IEnumerable<Object> GetAllItensRelation()
         {
-            VDS.RDF.Options.UriLoaderCaching = false;
-            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
-            IGraph h = new Graph();
-            fuseki.LoadGraph(h, (Uri)null);
-            
-            string query = "select distinct ?relation ?obj " +   
-                            "where{ "+
-                            "  <http://metadadorefibra.ufpe/"+item+ "> ?relation ?obj " +
-                            "} ";
+           List<Object> listRdfBase = new List<Object>();
+           try{
+                VDS.RDF.Options.UriLoaderCaching = false;
+                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+                IGraph h = new Graph();
+                fuseki.LoadGraph(h, (Uri)null);
+               
+                var query = "select                                  " +
+                            "distinct  ?item1 ?relation ?item2 ?obj  " +
+                            "WHERE {                                 " +
+                            "   ?item1 ?relation ?obj .              " +
+                            "  ?item2 ?relation ?obj .               " +
+                            "  filter ( ?item1 != ?item2) .          " +
+                            "  filter (!isLiteral(?obj)) .           " +
+                            "}                                       " +
+                            "group by  ?item1 ?relation ?item2 ?obj  "; 
 
-            SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
-            string text = "";
-            string image = "";
-            string title = "";
-            List<string> listRelation = new List<string>();
-            foreach (SparqlResult result in rset.Results)
-            {
-                
-                if (result.Value("relation").ToString().Contains("text"))
+                SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
+                foreach (SparqlResult result in rset.Results)
                 {
-                    text = result.Value("obj").ToString();
-                }
-                if (result.Value("relation").ToString().Contains("title"))
-                {
-                    title = result.Value("obj").ToString();
-                }
-                if (result.Value("relation").ToString().Contains("image"))
-                {
-                    image = result.Value("obj").ToString();
-                }
-
-                if (result.Value("relation").ToString().Contains("relation"))
-                {
-                    listRelation.Add(result.Value("obj").ToString());
+                    listRdfBase.Add(new
+                    {
+                        item1 = result.Value("item1").ToString(),
+                        relation = result.Value("relation").ToString(),
+                        item2 = result.Value("item2").ToString(),
+                        obj = result.Value("obj").ToString()
+                    });
                 }
             }
-            
+            catch(VDS.RDF.Storage.RdfStorageException) {
+                    throw new FusekiException("Connetion database error.");
+            }
+            catch(VDS.RDF.Query.RdfQueryException) {
+                     throw new FusekiException("Malformed query.");
+            }
+            VDS.RDF.Options.UriLoaderCaching = true;
+            return listRdfBase;
+        }
+        public Object GetItemByName( string item)
+        {
+            List<string> texts =new List<string>();
+            string image = "";
+            string title = "";
+            List<string> listRelationObject = new List<string>();
+            IEnumerable<object> listRelationItem = new List<string>();
+            try{                
+                VDS.RDF.Options.UriLoaderCaching = false;
+                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+                IGraph h = new Graph();
+                fuseki.LoadGraph(h, (Uri)null);
+
+                string query = "select distinct ?relation ?obj " +   
+                                "where { "+
+                                "  "+ValidateNameItemRefibra(item)+ " ?relation ?obj " +
+                                " } ";
+              
+
+                SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);            
+                
+                foreach (SparqlResult result in rset.Results)
+                {                    
+                    if (result.Value("relation").ToString().Contains("text"))
+                    {
+                        texts.Add(result.Value("obj").ToString());
+                    }
+                    if (result.Value("relation").ToString().Contains("title"))
+                    {
+                        title = result.Value("obj").ToString();
+                    }
+                    if (result.Value("relation").ToString().Contains("image"))
+                    {
+                        image = result.Value("obj").ToString();
+                    }
+                    if (result.Value("relation").ToString().Contains("relation"))
+                    {
+                        listRelationObject.Add(result.Value("obj").ToString());
+                    }                    
+                }
+                listRelationItem = GetItensRelationByItemName(item);
+            }
+            catch(VDS.RDF.Storage.RdfStorageException) {
+                    throw new FusekiException("Connetion database error.");
+            }
+            catch(VDS.RDF.Query.RdfQueryException) {
+                     throw new FusekiException("Malformed query.");
+            }
 
             VDS.RDF.Options.UriLoaderCaching = true;
             return new
             {
-                Text = text,
+                Text = texts,
                 Image = image,
                 Title = title,
-                ListRelation = listRelation
+                ListRelation = listRelationObject,
+                listRelationItem = listRelationItem
             }; 
         }
-
-        public IEnumerable<Object> GetItensRelation()
+        public IEnumerable<Object> GetItensRelationByItemName(string itemName)
         {
             VDS.RDF.Options.UriLoaderCaching = false;
             FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
@@ -161,12 +203,14 @@ namespace ApiRefibra.Implementation
             fuseki.LoadGraph(h, (Uri)null);
             List<Object> listRdfBase = new List<Object>();
 
+            itemName = ValidateNameItemRefibra(itemName);
             var query = "select                                  " +
                         "distinct  ?item1 ?relation ?item2 ?obj  " +
                         "WHERE {                                 " +
                         "   ?item1 ?relation ?obj .              " +
                         "  ?item2 ?relation ?obj .               " +
                         "  filter ( ?item1 != ?item2) .          " +
+                        " filter (?item1 = "+ itemName +")        "+
                         "  filter (!isLiteral(?obj)) .           " +
                         "}                                       " +
                         "group by  ?item1 ?relation ?item2 ?obj  "; 
@@ -182,19 +226,53 @@ namespace ApiRefibra.Implementation
                     obj = result.Value("obj").ToString()
                 });
             }
-
-            //foreach (SparqlResult result in rset.Results)
-            //{
-
-            //    listRdfBase.Add(result);
-            //}
-
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
+        public IEnumerable<Object> GetAllRelationsNames(){
+             VDS.RDF.Options.UriLoaderCaching = false;
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            IGraph h = new Graph();
+            fuseki.LoadGraph(h, (Uri)null);
+            List<string> listRelations = new List<string>();
 
-        #region Privates methods
-        //
+            var query = "SELECT distinct ?object "+
+                                "WHERE { "+
+                                " ?subject <http://metadadorefibra.ufpe/relation> ?object "+
+                                "}"; 
+
+            SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
+            foreach (SparqlResult result in rset.Results)
+            {
+                listRelations.Add(                
+                    result.Value("object").ToString()                   
+                );
+            }
+            VDS.RDF.Options.UriLoaderCaching = true;
+            return listRelations;
+        }
+        public IEnumerable<Object> GetItensByRelationName(string relationName){
+             VDS.RDF.Options.UriLoaderCaching = false;
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            IGraph h = new Graph();
+            fuseki.LoadGraph(h, (Uri)null);
+            List<object> listItens = new List<object>();
+
+            var query = "SELECT ?item "+
+                        "WHERE { "+
+                        " ?item ?p <"+relationName+"> "+
+                        " }"; 
+
+            SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
+            foreach (SparqlResult result in rset.Results)
+            {
+                listItens.Add(GetItemByName(result.Value("item").ToString()));             
+            }
+            VDS.RDF.Options.UriLoaderCaching = true;
+            return listItens;
+        }
+       
+        #region Private methods
         private async Task<WikifierObj> ProcessarWikifier(string text)
         {
             var dict = new Dictionary<string, string>();
@@ -218,7 +296,6 @@ namespace ApiRefibra.Implementation
                 return null;
             }
         }
-        //
         private void InsertTriples(IEnumerable<RDF> rdfs)
         {
             try
@@ -254,7 +331,12 @@ namespace ApiRefibra.Implementation
                 throw ex;
             }
         }
-        //
+        private string ValidateNameItemRefibra(string itemName){
+           itemName = string.IsNullOrEmpty(itemName) ? "" : itemName;
+           itemName = itemName.Contains("<") ? itemName : "<"+itemName;
+           itemName = itemName.Contains(">") ? itemName : itemName+">";
+           return itemName.Contains(_appSettings.MetaRefibra) ? itemName : "<"+_appSettings.MetaRefibra + itemName +">";
+        }
         #endregion
     }
 }

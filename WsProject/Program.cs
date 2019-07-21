@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WsTestes
+namespace ApiRefibra
 {
     public class Program
     {
