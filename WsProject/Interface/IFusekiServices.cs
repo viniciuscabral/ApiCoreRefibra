@@ -8,11 +8,11 @@ namespace ApiRefibra.Interface
     public interface IFusekiServices
     {
 
-        Task<List<RDF>> RegisterItem(Item item);
-        IEnumerable<Object> GetAllItens();
-        Object GetItemByName(string item);
-        IEnumerable<Object> GetAllItensRelation();
-        IEnumerable<Object> GetAllRelationsNames();
-        IEnumerable<Object> GetItensByRelationName(string relationName);
+        Task<List<RDF>> RegisterItem(Item item, string dataSet);
+        IEnumerable<Object> GetAllItens(string dataSet);
+        Object GetItemByName(string item, string dataSet);
+        IEnumerable<Object> GetAllItensRelation(string dataSet);
+        IEnumerable<Object> GetAllRelationsNames(string dataSet);
+        IEnumerable<Object> GetItensByRelationName(string relationName, string dataSet);
     }
 }

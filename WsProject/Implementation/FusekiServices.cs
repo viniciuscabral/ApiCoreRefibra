@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Storage;
@@ -22,7 +23,25 @@ namespace ApiRefibra.Implementation
         {
             _appSettings = settings.Value;
         }
-        public async Task<List<RDF>> RegisterItem(Item item)
+
+      
+        private void UploadBase64Images(string imgName, string imgBase64)
+        {
+            Account account = new Account(
+                      "dixelsjzs",
+                      "539525997285929",
+                      "mESwZ_HvKphyBRer2Ui8KqzMmPw");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(imgBase64),
+                PublicId = "Refibra//" + imgName
+            };
+            var uploadResult = cloudinary.UploadAsync(uploadParams).Result;            
+        }
+
+        public async Task<List<RDF>> RegisterItem(Item item, string dataSet)
         {
 
             WikifierObj wikifierObj = await ProcessarWikifier(item.Text);
@@ -49,11 +68,11 @@ namespace ApiRefibra.Implementation
                 rdf.Object = item.Text;
                 listRdf.Add(rdf);
 
-                rdf = new RDF();
-                rdf.Subject = _appSettings.MetaRefibra + item.Name;
-                rdf.Predicate = _appSettings.MetaRefibra + "image";
-                rdf.Object = item.Image;
-                listRdf.Add(rdf);
+                //rdf = new RDF();
+                //rdf.Subject = _appSettings.MetaRefibra + item.Name;
+                //rdf.Predicate = _appSettings.MetaRefibra + "image";
+                //rdf.Object = item.Image;
+                //listRdf.Add(rdf);
 
                 rdf = new RDF();
                 rdf.Subject = _appSettings.MetaRefibra + item.Name;
@@ -61,7 +80,8 @@ namespace ApiRefibra.Implementation
                 rdf.Object = item.Name;                
                 listRdf.Add(rdf);
 
-                InsertTriples(listRdf);
+                InsertTriples(listRdf, dataSet);
+                UploadBase64Images(item.Name, item.Image);
 
                 return listRdf;
             }
@@ -70,41 +90,43 @@ namespace ApiRefibra.Implementation
             }
             
         }     
-        public IEnumerable<Object> GetAllItens()
+        public IEnumerable<Object> GetAllItens(string dataSet)
         {
-
-            VDS.RDF.Options.UriLoaderCaching = false;
-            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            
+            VDS.RDF.Options.UriLoaderCaching = false;           
+            List<Object> listRdfBase = new List<Object>();
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+            fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
-            List<Object> listRdfBase = new List<Object>();
             SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                               " +
                                                                 "WHERE {                                                " +
                                                                 "  ?item <http://metadadorefibra.ufpe/text> ?object .   " +
                                                                 "  ?item <http://metadadorefibra.ufpe/title> ?title .   " +
-                                                                "  ?item <http://metadadorefibra.ufpe/image> ?img       " +
                                                                 "}");
 
             foreach (SparqlResult result in rset.Results)
             {
                 listRdfBase.Add(new { item = result.Value("item").ToString()
                                     , title = result.Value("title").ToString()
-                                     , image = result.Value("img").ToString()
                 });
+
+
             }
 
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
-        public IEnumerable<Object> GetAllItensRelation()
+        public IEnumerable<Object> GetAllItensRelation(string dataSet)
         {
            List<Object> listRdfBase = new List<Object>();
            try{
                 VDS.RDF.Options.UriLoaderCaching = false;
-                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+                fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
                 IGraph h = new Graph();
                 fuseki.LoadGraph(h, (Uri)null);
-               
+
                 var query = "select                                  " +
                             "distinct  ?item1 ?relation ?item2 ?obj  " +
                             "WHERE {                                 " +
@@ -136,7 +158,7 @@ namespace ApiRefibra.Implementation
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
-        public Object GetItemByName( string item)
+        public Object GetItemByName(string item, string dataSet)
         {
             List<string> texts =new List<string>();
             string image = "";
@@ -145,7 +167,8 @@ namespace ApiRefibra.Implementation
             IEnumerable<object> listRelationItem = new List<string>();
             try{                
                 VDS.RDF.Options.UriLoaderCaching = false;
-                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+                fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
                 IGraph h = new Graph();
                 fuseki.LoadGraph(h, (Uri)null);
 
@@ -176,7 +199,7 @@ namespace ApiRefibra.Implementation
                         listRelationObject.Add(result.Value("obj").ToString());
                     }                    
                 }
-                listRelationItem = GetItensRelationByItemName(item);
+                listRelationItem = GetItensRelationByItemName(item,dataSet);
             }
             catch(VDS.RDF.Storage.RdfStorageException) {
                     throw new FusekiException("Connetion database error.");
@@ -195,10 +218,11 @@ namespace ApiRefibra.Implementation
                 listRelationItem = listRelationItem
             }; 
         }
-        public IEnumerable<Object> GetItensRelationByItemName(string itemName)
+        public IEnumerable<Object> GetItensRelationByItemName(string itemName, string dataSet)
         {
             VDS.RDF.Options.UriLoaderCaching = false;
-            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+            fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
             List<Object> listRdfBase = new List<Object>();
@@ -229,9 +253,11 @@ namespace ApiRefibra.Implementation
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRdfBase;
         }
-        public IEnumerable<Object> GetAllRelationsNames(){
+        public IEnumerable<Object> GetAllRelationsNames(string dataSet)
+        {
              VDS.RDF.Options.UriLoaderCaching = false;
-            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+            fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
             List<string> listRelations = new List<string>();
@@ -251,9 +277,10 @@ namespace ApiRefibra.Implementation
             VDS.RDF.Options.UriLoaderCaching = true;
             return listRelations;
         }
-        public IEnumerable<Object> GetItensByRelationName(string relationName){
+        public IEnumerable<Object> GetItensByRelationName(string relationName, string dataSet){
              VDS.RDF.Options.UriLoaderCaching = false;
-            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+            FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}", dataSet));
+            fuseki.SetCredentials(_appSettings.LoginFuseki, _appSettings.PasswordFuseki);
             IGraph h = new Graph();
             fuseki.LoadGraph(h, (Uri)null);
             List<object> listItens = new List<object>();
@@ -266,7 +293,7 @@ namespace ApiRefibra.Implementation
             SparqlResultSet rset = (SparqlResultSet)fuseki.Query(query);
             foreach (SparqlResult result in rset.Results)
             {
-                listItens.Add(GetItemByName(result.Value("item").ToString()));             
+                listItens.Add(GetItemByName(result.Value("item").ToString(),dataSet));             
             }
             VDS.RDF.Options.UriLoaderCaching = true;
             return listItens;
@@ -296,11 +323,11 @@ namespace ApiRefibra.Implementation
                 return null;
             }
         }
-        private void InsertTriples(IEnumerable<RDF> rdfs)
+        private void InsertTriples(IEnumerable<RDF> rdfs, string dataSet)
         {
             try
             {
-                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString);
+                FusekiConnector fuseki = new FusekiConnector(_appSettings.StorageConnectionString.Replace("{dataset}",dataSet));
                 fuseki.SetCredentials(_appSettings.LoginFuseki,_appSettings.PasswordFuseki);
                 IGraph g = new Graph();
                 fuseki.LoadGraph(g, (Uri)null);
@@ -337,6 +364,8 @@ namespace ApiRefibra.Implementation
            itemName = itemName.Contains(">") ? itemName : itemName+">";
            return itemName.Contains(_appSettings.MetaRefibra) ? itemName : "<"+_appSettings.MetaRefibra + itemName +">";
         }
+
+       
         #endregion
     }
 }
