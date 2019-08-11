@@ -21,6 +21,20 @@ namespace ApiRefibra.Controllers
         }
 
         /// <summary>
+        /// Get all database names 
+        /// </summary>
+        /// <returns>Generic list with all database names</returns>
+        [HttpGet]
+        [Route("GetDataSetNames")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public IActionResult GetDataSetNames()
+        {
+            return Ok(_fusekiService.GetDataSetNames());
+        }
+
+        /// <summary>
         /// Get all database itens 
         /// </summary>
         /// <returns>Generic list with all itens in the database</returns>

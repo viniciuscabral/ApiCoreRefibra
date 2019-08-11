@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "GetAllItens",
+      "launchUrl": "GetDataSetNames",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "WsProject": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "GetAllItens",
+      "launchUrl": "GetDataSetNames",
       "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
