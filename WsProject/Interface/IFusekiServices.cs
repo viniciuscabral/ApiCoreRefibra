@@ -9,7 +9,7 @@ namespace ApiRefibra.Interface
     {
 
         List<string> GetDataSetNames();
-        Task<List<RDF>> RegisterItem(Item item, string dataSet);
+        List<RDF> RegisterItem(Item item, string dataSet);
         IEnumerable<Object> GetAllItens(string dataSet);
         Object GetItemByName(string item, string dataSet);
         IEnumerable<Object> GetAllItensRelation(string dataSet);

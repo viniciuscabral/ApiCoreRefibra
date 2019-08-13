@@ -13,12 +13,13 @@ using VDS.RDF.Query;
 using VDS.RDF.Storage;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace ApiRefibra.Implementation
 {
     public class FusekiServices : IFusekiServices
     {
-        private readonly HttpClient client = new HttpClient();
+        
         private AppSettings _appSettings { get; set; }
         public FusekiServices(IOptions<AppSettings> settings)
         {
@@ -49,25 +50,25 @@ namespace ApiRefibra.Implementation
             }
             return dataSetName;           
         }
-        public async Task<List<RDF>> RegisterItem(Item item, string dataSet)
+        public List<RDF> RegisterItem(Item item, string dataSet)
         {
 
-            WikifierObj wikifierObj = await ProcessarWikifier(item.Text);
+            WikifierObj wikifierObj = ProcessarWikifier(item.Text);
             List<RDF> listRdf = new List<RDF>();
             if(wikifierObj != null)
             {
                 RDF rdf = null;
-                foreach(AnnotationObj annotationObj in wikifierObj.Annotations)
+                wikifierObj.Annotations.Where(x => x.PageRank >= _appSettings.PageRank)
+                    .OrderByDescending(x => x.PageRank).ToList().ForEach(y =>
                 {
                     rdf = new RDF();
                     rdf.Subject = _appSettings.MetaRefibra + item.Name;
                     rdf.Predicate = _appSettings.MetaRefibra + "relation";
-                    rdf.Object = annotationObj.Url;
-                    if(annotationObj.PageRank > _appSettings.PageRank)
-                    {
-                        listRdf.Add(rdf);
-                    }                    
-                }
+                    rdf.Object = y.Url;
+                    listRdf.Add(rdf);
+                    
+                });
+               
 
                 rdf = new RDF();
                 rdf.Subject = _appSettings.MetaRefibra + item.Name;
@@ -301,7 +302,7 @@ namespace ApiRefibra.Implementation
         }
        
         #region Private methods
-        private async Task<WikifierObj> ProcessarWikifier(string text)
+        private WikifierObj ProcessarWikifier(string text)
         {
             var dict = new Dictionary<string, string>();
             dict.Add("userKey", _appSettings.WikifierKey);
@@ -310,13 +311,14 @@ namespace ApiRefibra.Implementation
             dict.Add("includeCosines", "false");
             dict.Add("support", "false");
             dict.Add("applyPageRankSqThreshold ", "false");
-            dict.Add("pageRankSqThreshold", "0,6");
 
-            var response = await client.PostAsync("http://www.wikifier.org/annotate-article", new FormUrlEncodedContent(dict));
+
+            HttpClient client = new HttpClient();
+            var response = client.PostAsync("http://www.wikifier.org/annotate-article", new FormUrlEncodedContent(dict)).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                WikifierObj wikifierObjs = await response.Content.ReadAsAsync<WikifierObj>();
+                WikifierObj wikifierObjs = response.Content.ReadAsAsync<WikifierObj>().Result;
                 return wikifierObjs;
             }
             else

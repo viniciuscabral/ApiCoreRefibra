@@ -127,9 +127,9 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(400)]   
         [ProducesResponseType(500)]             
         [Route("AddItem")]
-        public async Task<IActionResult> AddItemAsync([FromBody]Item item, [FromQuery] string dataSet)
+        public IActionResult AddItemAsync([FromBody]Item item, [FromQuery] string dataSet)
         {            
-            List<RDF> List = await _fusekiService.RegisterItem(item, dataSet);
+            List<RDF> List = _fusekiService.RegisterItem(item, dataSet);
             return CreatedAtAction("AddItemAsync", List);
             
         }
