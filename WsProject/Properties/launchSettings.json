@@ -11,19 +11,25 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "GetDataSetNames",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_FUSEKI_CONNECTION": "http://localhost:3030",
+        "DATABASE_FUSEKI_LOGIN": "admin",
+        "DATABASE_FUSEKI_PASS": "vini2"
       }
     },
     "WsProject": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "GetDataSetNames",
       "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_FUSEKI_CONNECTION": "http://localhost:3030",
+        "DATABASE_FUSEKI_LOGIN": "admin",
+        "DATABASE_FUSEKI_PASS": "vini2"
       }
     }
   }

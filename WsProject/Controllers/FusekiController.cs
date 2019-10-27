@@ -73,7 +73,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]  
         [ProducesResponseType(500)] 
-        public IActionResult ItensRelation([FromQuery] string dataSet)
+         public IActionResult ItensRelation([FromQuery] string dataSet)
         {
             return Ok(_fusekiService.GetAllItensRelation(dataSet));
         }

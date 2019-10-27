@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  refibra-network:
+    driver: bridge
+
+services: 
+    refibra-fuseki-database: 
+      container_name: refibra-fuseki-database
+      hostname: refibra-fuseki-database
+      image: 'stain/jena-fuseki'
+      environment: 
+        ADMIN_PASSWORD: vini2
+      volumes:
+        - db-data:/fuseki stain/jena-fuseki
+        - ./WsProject/fusekidatabase/configuration/.:/fuseki/configuration/.
+        - ./WsProject/fusekidatabase/databases/.:/fuseki/databases/.
+      ports: 
+        - "3030:3030"
+      restart: always
+      networks:
+        - refibra-network
+
+    refibra-api: 
+      container_name: refibra-api
+      hostname: refibra-api
+      build: ./WsProject
+      links:
+        - refibra-fuseki-database
+      environment:
+        DATABASE_CONNECTION: "http://refibra-fuseki-database"
+        DATABASE_FUSEKI_LOGIN: "admin"
+        DATABASE_FUSEKI_PASS: "vini2"
+      ports: 
+        - "5000:80"
+      restart: always
+      networks:
+        - refibra-network
+
+    # refibra-web:
+    #   container_name: refibra-web
+    #   hostname: refibra-web
+    #   build: 
+    #     context: https://github.com/viniciuscabral/RefibraAngular.git
+    #   ports:
+    #     - '4201:4201'
+    #   networks:
+    #     - refibra-network
+
+volumes:
+  db-data:
