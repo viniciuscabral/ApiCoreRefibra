@@ -6,9 +6,9 @@
 @prefix fuseki: <http://jena.apache.org/fuseki#> .
 
 :service_tdb_all  a                   fuseki:Service ;
-        rdfs:label                    "TDB refibra" ;
+        rdfs:label                    "TDB Refibra" ;
         fuseki:dataset                :tdb_dataset_readwrite ;
-        fuseki:name                   "refibra" ;
+        fuseki:name                   "Refibra" ;
         fuseki:serviceQuery           "query" , "sparql" ;
         fuseki:serviceReadGraphStore  "get" ;
         fuseki:serviceReadWriteGraphStore
@@ -18,4 +18,4 @@
 
 :tdb_dataset_readwrite
         a             tdb:DatasetTDB ;
-        tdb:location  "/fuseki/databases/refibra" .
+        tdb:location  "/fuseki/databases/Refibra" .

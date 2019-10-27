@@ -28,7 +28,7 @@ services:
       links:
         - refibra-fuseki-database
       environment:
-        DATABASE_CONNECTION: "http://refibra-fuseki-database"
+        DATABASE_FUSEKI_CONNECTION: "http://refibra-fuseki-database:3030"
         DATABASE_FUSEKI_LOGIN: "admin"
         DATABASE_FUSEKI_PASS: "vini2"
       ports: 
@@ -37,15 +37,15 @@ services:
       networks:
         - refibra-network
 
-    # refibra-web:
-    #   container_name: refibra-web
-    #   hostname: refibra-web
-    #   build: 
-    #     context: https://github.com/viniciuscabral/RefibraAngular.git
-    #   ports:
-    #     - '4201:4201'
-    #   networks:
-    #     - refibra-network
+    refibra-web:
+      container_name: refibra-web
+      hostname: refibra-web
+      build: 
+        context: https://github.com/viniciuscabral/RefibraAngular.git
+      ports:
+        - '4201:4201'
+      networks:
+        - refibra-network
 
 volumes:
   db-data:
