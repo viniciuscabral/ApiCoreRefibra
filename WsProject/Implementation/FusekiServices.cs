@@ -182,7 +182,8 @@ namespace ApiRefibra.Implementation
             IEnumerable<object> listRelationItem = new List<string>();
             try{                
                 VDS.RDF.Options.UriLoaderCaching = false;
-                FusekiConnector fuseki = new FusekiConnector($"/{dataSet}/data");                
+                _dataSet = dataSet;
+                FusekiConnector fuseki = CreateFusekiConnector();
                 IGraph h = new Graph();
                 fuseki.LoadGraph(h, (Uri)null);
 
