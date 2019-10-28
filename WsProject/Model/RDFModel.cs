@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiRefibra.Model
 {
-    public class RDF
+    public class RDFModel
     {
         public string Subject { get; set; }
         public string Predicate { get; set; }

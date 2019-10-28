@@ -14,10 +14,10 @@ namespace ApiRefibra.Controllers
 
     public class FusekiController : Controller
     {
-        private IFusekiServices _fusekiService;        
-        public FusekiController(IFusekiServices fusekiService)
+        private readonly IFusekiBusiness _fusekiBusiness;        
+        public FusekiController(IFusekiBusiness fusekiService)
         {
-            _fusekiService = fusekiService;
+            _fusekiBusiness = fusekiService;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetDataSetNames()
         {
-            return Ok(_fusekiService.GetDataSetNames());
+            return Ok(_fusekiBusiness.GetDataSetNames());
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)]                
         public IActionResult GetAllItens(string dataSet) 
         {      
-            return Ok(_fusekiService.GetAllItens(dataSet));
+            return Ok(_fusekiBusiness.GetAllItens(dataSet));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)]        
         public IActionResult ItensByName([FromQuery] String itemName, [FromQuery] string dataSet)
         {
-            return Ok(_fusekiService.GetItemByName(itemName, dataSet));
+            return Ok(_fusekiBusiness.GetItemByName(itemName, dataSet));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)] 
          public IActionResult ItensRelation([FromQuery] string dataSet)
         {
-            return Ok(_fusekiService.GetAllItensRelation(dataSet));
+            return Ok(_fusekiBusiness.GetAllItensRelation(dataSet));
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)] 
         public IActionResult GetAllRelationsNames([FromQuery] string dataSet)
         {
-            return Ok(_fusekiService.GetAllRelationsNames(dataSet));
+            return Ok(_fusekiBusiness.GetAllRelationsNames(dataSet));
         }
 
         /// <summary>
@@ -103,13 +103,14 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(500)] 
         public IActionResult GetItensByRelationName([FromQuery] String relatioName, [FromQuery] string dataSet)
         {
-            return Ok(_fusekiService.GetItensByRelationName(relatioName, dataSet));
+            return Ok(_fusekiBusiness.GetItensByRelationName(relatioName, dataSet));
         }
-        
+
         /// <summary>
         /// Set a new item
         /// </summary>
         /// <param name="item">Item</param>
+        /// <param name="dataSet">DataSetName</param>
         /// <remarks>
         /// Sample Item:
         ///
@@ -127,19 +128,11 @@ namespace ApiRefibra.Controllers
         [ProducesResponseType(400)]   
         [ProducesResponseType(500)]             
         [Route("AddItem")]
-        public IActionResult AddItemAsync([FromBody]Item item, [FromQuery] string dataSet)
+        public IActionResult AddItemAsync([FromBody]ItemRefibraModel item, [FromQuery] string dataSet)
         {            
-            List<RDF> List = _fusekiService.RegisterItem(item, dataSet);
+            List<RDFModel> List = _fusekiBusiness.RegisterItem(item, dataSet);
             return CreatedAtAction("AddItemAsync", List);
             
         }
-
-      
-
-
-        
-
-
-
     }
 }

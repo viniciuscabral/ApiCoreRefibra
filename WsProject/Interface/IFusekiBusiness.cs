@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace ApiRefibra.Interface
 {
-    public interface IFusekiServices
+    public interface IFusekiBusiness
     {
 
         List<string> GetDataSetNames();
-        List<RDF> RegisterItem(Item item, string dataSet);
+        List<RDFModel> RegisterItem(ItemRefibraModel item, string dataSet);
         IEnumerable<Object> GetAllItens(string dataSet);
         Object GetItemByName(string item, string dataSet);
         IEnumerable<Object> GetAllItensRelation(string dataSet);

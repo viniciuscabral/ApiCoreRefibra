@@ -28,13 +28,11 @@ namespace ApiRefibra
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
           
-            services.AddScoped<IFusekiServices, FusekiServices>();
-            
+            services.AddScoped<IFusekiBusiness, FusekiBusiness>();
+            services.AddScoped<IWikifierBusiness, WikifierBusiness>();
+
             services.AddDbContext<ApplicationDbContext>(context => { context.UseInMemoryDatabase("ProjetoVini"); });
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddAutoMapper();

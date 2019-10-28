@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiRefibra.Model
 {
-    public class Item
+    public class ItemRefibraModel
     {
 
         public string Name { get; set; }

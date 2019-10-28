@@ -8,6 +8,8 @@ namespace ApiRefibra.Model
         public string PasswordFuseki { get; set; }
         public string MetaRefibra { get; set; }
         public double PageRank { get; set; }
+
+        public string WikifierUrl { get; set; }
         public string WikifierKey { get; set; }
         public string NameCloudUpload { get; set; }
         public string PassUpload { get; set; }

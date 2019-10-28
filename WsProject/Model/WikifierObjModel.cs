@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiRefibra.Model
 {
-
-    public class WikifierObj
+    public class WikifierObjModel
     {
         public List<AnnotationObj> Annotations { get; set; }
     }
@@ -20,8 +19,7 @@ namespace ApiRefibra.Model
        public string SecLang { get; set; }
        public string SecTitle { get; set; }
        public string SecUrl { get; set; }
-       public string WikiDataItemId { get; set; }
-       //public string DbPediaTypes { get; set; }
+       public string WikiDataItemId { get; set; }       
        public string DbPediaIri { get; set; }
        public string SupportLen { get; set; }
     }
