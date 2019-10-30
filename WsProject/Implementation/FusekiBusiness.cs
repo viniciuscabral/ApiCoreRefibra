@@ -32,19 +32,20 @@ namespace ApiRefibra.Implementation
 
         public List<string> GetDataSetNames()
         {
+            string dataBaseAutentication = Environment.GetEnvironmentVariable("DATABASE_AUTENTICATION");
             string baseUrl = dataBaseConnection + "/$/datasets";
             List<string> dataSetName = new List<string>();
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
             request.Headers.Add(
-                HttpRequestHeader.Authorization.ToString(), "Basic YWRtaW46dmluaQ==");
+                HttpRequestHeader.Authorization.ToString(), dataBaseAutentication);
             var result = client.SendAsync(request).Result;
 
             using (HttpContent content = result.Content)
             {
                 string data = content.ReadAsStringAsync().Result;
 
-                if (data != null)
+                if (!String.IsNullOrEmpty(data))
                 {
                     var list = JObject.Parse(data)["datasets"].ToObject<List<object>>();
                     list.ForEach(x =>
@@ -52,6 +53,8 @@ namespace ApiRefibra.Implementation
                         dataSetName.Add(JObject.Parse(x.ToString())["ds.name"].ToString().Replace("/", ""));
                     });
                 }
+                else
+                    dataSetName.Add("Refibra");
             }
             return dataSetName;
         }
