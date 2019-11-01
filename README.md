@@ -18,7 +18,18 @@ This project is son of a great research realise in the context Vinícius Cabral'
 This research it’s about a practical proposal for the application of Interactive Epistemography with the use of technological tools of the Semantic Web prototyped with Postal Stamps as informational items and the interacting agent as a source of information. The positivist way of classification leaves no space for knowledge outside the cycles of specialized domain to be disclosed and exploited, a hierarchical classification avoid other possibilities. In this way it is necessary to think of integrative practices that give equal opportunity so that different world views can be used to represent items in digital environments, an open and constantly changing classification. As a consequence of the insertion of logical pluralism the possibility of discovering different knowledge, in a research or navigation, is enhanced the encounter with other types of thinking: serendipity. In this sense, this research aims to discuss and develop within the context of the Brazilian Philatelic Repository (REFIBRA) a proposal for the application of Interactive Epistemography, based on concepts such as declassification and autonarration, using Semantic Web technologies and providing the participation of the interacting agent as constant resignification of informational items, in this scenario the Postal Stamps. Therefore, in the research was used the bibliographic and documentary survey to identify the discussion of concepts and basic practices for the development of the proposed application. Subsequently the project took practical steps to create the technological tool that would allow the concrete application of what was studied in the first stage. In this way it was possible to create a Web environment in which it is possible to participate in any world view in equal measure, besides providing the retrieval, meeting and discovery of information.
 
 # How to use
-[TODO]
+
+Docker version 2.1+
+
+1. git clone https://github.com/viniciuscabral/ApiCoreRefibra.git
+2. cd ApiCoreRefibra
+3. docker-compose build
+4. docker-compose up
+
+##Navigate
+
+1. A API disponível em: http://localhost:8000/swagger
+2. Web Site disponível em: http://localhost:4200
 # Licenses
 [TODO]
 
