@@ -26,10 +26,11 @@ Docker version 2.1+
 3. docker-compose build
 4. docker-compose up
 
-##Navigate
+## Navigate
 
-1. A API disponível em: http://localhost:8000/swagger
-2. Web Site disponível em: http://localhost:4200
+1. API: http://localhost:5000/swagger
+2. Web Site: http://localhost:4201
+
 # Licenses
 [TODO]
 
