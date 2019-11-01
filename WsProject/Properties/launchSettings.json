@@ -18,7 +18,8 @@
         "DATABASE_FUSEKI_CONNECTION": "http://localhost:3030",
         "DATABASE_FUSEKI_LOGIN": "admin",
         "DATABASE_FUSEKI_PASS": "vini2",
-        "DATABASE_AUTENTICATION": "Basic YWRtaW46dmluaTI="
+        "DATABASE_AUTENTICATION": "Basic YWRtaW46dmluaTI=",
+        "WIKIFIER_KEY": "sqjrgxfcuvvbjijjscvsfsjugnerja"
       }
     },
     "WsProject": {
@@ -31,7 +32,9 @@
         "DATABASE_FUSEKI_CONNECTION": "http://localhost:3030",
         "DATABASE_FUSEKI_LOGIN": "admin",
         "DATABASE_FUSEKI_PASS": "vini2",
-        "DATABASE_AUTENTICATION": "Basic YWRtaW46dmluaTI="
+        "DATABASE_AUTENTICATION": "Basic YWRtaW46dmluaTI=",
+        "WIKIFIER_KEY": "sqjrgxfcuvvbjijjscvsfsjugnerja"       
+
       }
     }
   }

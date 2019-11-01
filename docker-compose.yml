@@ -31,6 +31,7 @@ services:
         DATABASE_FUSEKI_CONNECTION: "http://refibra-fuseki-database:3030"
         DATABASE_FUSEKI_LOGIN: "admin"
         DATABASE_FUSEKI_PASS: "vini2"
+        WIKIFIER_KEY: "sqjrgxfcuvvbjijjscvsfsjugnerja"
       ports: 
         - "5000:80"
       restart: always

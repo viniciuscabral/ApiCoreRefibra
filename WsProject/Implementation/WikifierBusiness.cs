@@ -20,7 +20,7 @@ namespace ApiRefibra.Implementation
         public WikifierObjModel ProcessarWikifier(string text)
         {
             var dict = new Dictionary<string, string>();
-            dict.Add("userKey", _appSettings.WikifierKey);
+            dict.Add("userKey", Environment.GetEnvironmentVariable("WIKIFIER_KEY"));
             dict.Add("text", text);
             dict.Add("wikiDataClasses", "false");
             dict.Add("includeCosines", "false");
