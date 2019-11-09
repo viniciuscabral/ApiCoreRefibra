@@ -31,8 +31,6 @@ Docker version 2.1+
 1. API: http://localhost:5000/swagger
 2. Web Site: http://localhost:4201
 
-# Licenses
-[TODO]
 
 # Others informations
 
