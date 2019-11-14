@@ -13,8 +13,8 @@ services:
         ADMIN_PASSWORD: vini2
       volumes:
         - db-data:/fuseki stain/jena-fuseki
-        - ./WsProject/fusekidatabase/databases/Refibra/.:/fuseki/databases/Refibra/.
-        - ./WsProject/fusekidatabase/configuration/.:/fuseki/configuration/.        
+        - ./wsproject/fusekidatabase/databases/refibra/.:/fuseki/databases/Refibra/.
+        - ./wsproject/fusekidatabase/configuration/.:/fuseki/configuration/.        
       ports: 
         - "3030:3030"
       restart: always
@@ -24,7 +24,7 @@ services:
     refibra-api: 
       container_name: refibra-api
       hostname: refibra-api
-      build: ./WsProject
+      build: ./wsproject
       links:
         - refibra-fuseki-database
       environment:
