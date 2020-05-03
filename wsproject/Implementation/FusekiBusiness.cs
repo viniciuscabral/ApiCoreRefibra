@@ -363,17 +363,23 @@ namespace ApiRefibra.Implementation
         }
         private void UploadBase64Images(string imgName, string imgBase64)
         {
-            if (!String.IsNullOrEmpty(imgName) && !String.IsNullOrEmpty(imgBase64)) { 
+            if (!String.IsNullOrEmpty(imgName) && !String.IsNullOrEmpty(imgBase64)) {
+
+                string nameCloudUpload = Environment.GetEnvironmentVariable("CLOUDINARYNAME");
+                string passUpload = Environment.GetEnvironmentVariable("CLOUDINARYPWD");
+                string keyUpload = Environment.GetEnvironmentVariable("CLOUDINARYKEY");
+                string diretoryUpload = Environment.GetEnvironmentVariable("CLOUDINARYDIRETORY");
+
                 Account account = new Account(
-                          _appSettings.NameCloudUpload,
-                          _appSettings.PassUpload,
-                          _appSettings.KeyUpload);
+                          nameCloudUpload,
+                          passUpload,
+                          keyUpload);
 
                 Cloudinary cloudinary = new Cloudinary(account);
                 var uploadParams = new ImageUploadParams()
                 {
                     File = new FileDescription(imgBase64),
-                    PublicId = $"{_appSettings.DiretoryUpload}/{imgName}"
+                    PublicId = $"{diretoryUpload}/{imgName}"
                 };
                  var uploadResult = cloudinary.UploadAsync(uploadParams).Result;
             }
