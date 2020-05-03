@@ -36,7 +36,6 @@ services:
         CLOUDINARYPWD: "539525997285929"
         CLOUDINARYKEY: "mESwZ_HvKphyBRer2Ui8KqzMmPw"
         CLOUDINARYDIRETORY: "Refibra"
-        DATABASE_AUTENTICATION: "Basic YWRtaW46dmluaTI="
       ports: 
         - "5000:80"
       restart: always
