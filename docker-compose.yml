@@ -47,6 +47,9 @@ services:
       hostname: refibra-web
       build: 
         context: https://github.com/viniciuscabral/RefibraAngular.git
+        args:        
+          BACKEND_API_FUSEKI_URL: "http://devcabral.com.br:5000"
+          IMAGES_PATH: 'https://res.cloudinary.com/dixelsjzs/image/upload/v1565234304/Refibra/'
       ports:
         - '4201:4201'
       networks:
