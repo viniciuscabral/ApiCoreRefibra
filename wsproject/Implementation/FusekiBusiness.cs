@@ -32,36 +32,45 @@ namespace ApiRefibra.Implementation
 
         public List<string> GetDataSetNames()
         {
-            string dataBaseAutentication = Environment.GetEnvironmentVariable("DATABASE_AUTENTICATION");
-            string baseUrl = dataBaseConnection + "/$/datasets";
-            List<string> dataSetName = new List<string>();
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
-            request.Headers.Add(
-                HttpRequestHeader.Authorization.ToString(), dataBaseAutentication);
-            var result = client.SendAsync(request).Result;
+            var baseUrl = dataBaseConnection + "/$/datasets";
+            var dataSetName = new List<string>();
 
-            using (HttpContent content = result.Content)
+            try
             {
-                string data = content.ReadAsStringAsync().Result;
+                var dataBaseAutentication = Environment.GetEnvironmentVariable("DATABASE_AUTENTICATION");
+                var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
+                request.Headers.Add(
+                    HttpRequestHeader.Authorization.ToString(), dataBaseAutentication);
+                var result = client.SendAsync(request).Result;
 
-                if (!String.IsNullOrEmpty(data))
+                using (HttpContent content = result.Content)
                 {
-                    var list = JObject.Parse(data)["datasets"].ToObject<List<object>>();
-                    list.ForEach(x =>
+                    var data = content.ReadAsStringAsync().Result;
+
+                    if (!String.IsNullOrEmpty(data))
                     {
-                        dataSetName.Add(JObject.Parse(x.ToString())["ds.name"].ToString().Replace("/", ""));
-                    });
+                        var list = JObject.Parse(data)["datasets"].ToObject<List<object>>();
+                        list.ForEach(x =>
+                        {
+                            dataSetName.Add(JObject.Parse(x.ToString())["ds.name"].ToString().Replace("/", ""));
+                        });
+                    }
+                    else
+                        dataSetName.Add("Refibra");
                 }
-                else
-                    dataSetName.Add("Refibra");
+                return dataSetName;
             }
-            return dataSetName;
+            catch
+            {
+                dataSetName.Add("Refibra");
+                return dataSetName;
+            }
         }
         public List<RDFModel> RegisterItem(ItemRefibraModel item, string dataSet)
         {
-            WikifierObjModel wikifierObj = _wikifierBusiness.ProcessarWikifier(item.Text);
-            List<RDFModel> listRdf = new List<RDFModel>();
+            var wikifierObj = _wikifierBusiness.ProcessarWikifier(item.Text);
+            var listRdf = new List<RDFModel>();
             if (wikifierObj != null)
             {
                 RDFModel rdf = null;
@@ -103,10 +112,10 @@ namespace ApiRefibra.Implementation
         {
 
             VDS.RDF.Options.UriLoaderCaching = false;
-            List<Object> listRdfBase = new List<Object>();
-            FusekiConnector fuseki = CreateFusekiConnector(dataSet);
+            var listRdfBase = new List<Object>();
+            var fuseki = CreateFusekiConnector(dataSet);
 
-            SparqlResultSet rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                               " +
+            var rset = (SparqlResultSet)fuseki.Query("SELECT ?item ?title ?img                               " +
                                                                 "WHERE {                                                " +
                                                                 "  ?item <http://metadadorefibra.ufpe/text> ?object .   " +
                                                                 "  ?item <http://metadadorefibra.ufpe/title> ?title .   " +
